@@ -10,5 +10,6 @@ These groups can be then used server-side (in Firebase Functions or Firestore Ru
 
 You can test this project using `firebase emulators:start`. The website in `/test-login` is served. You have to log in with an email that exists in Google Workspace.
 You also have to be logged in with some credentials to Google Cloud for the process to access your groups. I'll write this later.
+You also have to setup the Firebase CLI, todo later or just google it. Sorry.
 
 If you run the emulators and modify code, remember to run `npx tsc` or `npx tsc -w` for watch mode.
