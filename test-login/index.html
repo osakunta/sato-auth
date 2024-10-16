@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Test Login</title>
+  </head>
+  <body>
+    <div>
+      <button id="login">Login</button>
+      <div id="user"></div>
+    </div>
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+      import {
+        getAuth,
+        GoogleAuthProvider,
+        signInWithPopup,
+        connectAuthEmulator,
+      } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+
+      const app = initializeApp({
+        apiKey: "any",
+        authDomain: "any",
+        projectId: "demo-osakunta",
+        storageBucket: "any",
+        messagingSenderId: "any",
+        appId: "any",
+      });
+
+      const auth = getAuth(app);
+      connectAuthEmulator(auth, "http://127.0.0.1:9099");
+
+      document.getElementById("login").addEventListener("click", async () => {
+        const provider = new GoogleAuthProvider();
+        await signInWithPopup(auth, provider);
+      });
+
+      auth.onAuthStateChanged(async (user) => {
+        const userElement = document.getElementById("user");
+        if (user) {
+          const token = await user.getIdTokenResult();
+          userElement.innerHTML = `Logged in as ${user.displayName} (${user.email}) with groups ${token.claims.groups}`;
+        } else {
+          userElement.innerHTML = "Not logged in";
+        }
+      });
+    </script>
+  </body>
+</html>
