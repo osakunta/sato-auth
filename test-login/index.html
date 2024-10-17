@@ -31,6 +31,9 @@
 
       document.getElementById("login").addEventListener("click", async () => {
         const provider = new GoogleAuthProvider();
+        provider.addScope(
+          "https://www.googleapis.com/auth/cloud-identity.groups.readonly"
+        );
         await signInWithPopup(auth, provider);
       });
 
